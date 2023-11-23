@@ -1,7 +1,6 @@
 # Weakly_Supervised_Anomaly
 
 ## Feature Extraction
-
 To install `pytorch-generative`, clone the repository and install the requirements:
 
 ```

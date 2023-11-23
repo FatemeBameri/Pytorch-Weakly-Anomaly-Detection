@@ -1,5 +1,16 @@
 # Weakly_Supervised_Anomaly
 
+## Installation
+
+To install `pytorch-generative`, clone the repository and install the requirements:
+
+```
+git clone https://www.github.com/EugenHotaj/pytorch-generative
+cd pytorch-generative
+pip install -r requirements.txt
+```
+
+
 Citation
 ===
 

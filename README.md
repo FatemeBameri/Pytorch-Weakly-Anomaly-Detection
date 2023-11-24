@@ -1,5 +1,5 @@
 # Weakly Supervised Aomaly Detection
-In this research, we have two main parts: feature extraction and anomaly detection. In the feature extraction phase, we use four architetures with thier combinations so that we consider nine types of feature network. In the anomaly detection phase, we suppose that anomaly and normal data have different distributions. Therefore, we first estimate appropriate distribution for them and then calculate the difference of distributions between two classes, anomaly and normal, in order to detect anomaly or normal for each video input.We evaluate the proposed method on the datasets: ShanghaiTech, Chuk Avenue, and UCSD Ped2.
+In this research, we have two main parts: feature extraction and anomaly detection. In the feature extraction phase, we use four architetures with thier combinations so that we consider nine types of feature networks. In the anomaly detection phase, we suppose that anomaly and normal data have different distributions. Therefore, we first estimate appropriate distribution for them and then calculate the difference of distributions between two classes, anomaly and normal, to detect anomaly or normal label for each video input.We evaluate the proposed method on three datasets: ShanghaiTech, Chuk Avenue, and UCSD Ped2.
 
 ## Feature Extraction
 Feature extraction networks applying in the paper:
@@ -19,4 +19,4 @@ To extract features we started with the implementation of the [I3D Feature Extra
 * ShanghaiTech part2 [(link)](https://drive.google.com/file/d/1a1Y9FZfq_E1pSAaLYo8TxLwHDsDWjZxm/view?usp=sharing)
 
 ## Anomaly Detection
-To detect anomaly, we first estimate probability distribution function for each class. After that, based on multi instance learning method and difference of the distribution in the training model, label of each videos can correctely be detected. For starting of implementation in this part, we use the [RTFM](https://github.com/tianyu0207/RTFM) repository.
+To detect anomaly, we first estimated probability distribution function for each class. After that, based on multi instance learning method and difference of the distribution in the training model, label of each videos can correctely be detected. For starting of implementation in this part, we used the [RTFM](https://github.com/tianyu0207/RTFM) repository.

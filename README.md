@@ -16,7 +16,7 @@ To extract features we started with the implementation of the [I3D Feature Extra
 * UCSD Ped2 [(link)](https://drive.google.com/file/d/1EUgplJ9Eqt-VdsqLm9GJ35TMQYzZR0n1/view?usp=sharing)
 * Chuk Avenue [(link)](https://drive.google.com/file/d/1KEXjiIsGfvsdu9Z05Yt8Cc3qZxByhcsO/view?usp=sharing)
 * ShanghaiTech part1 [(link)](https://drive.google.com/file/d/1kOp-vbkK8mH8tt4FhuUD4nPN455M6qaI/view?usp=sharing)
-* ShanghaiTech part2 [(link)]()
+* ShanghaiTech part2 [(link)](https://drive.google.com/file/d/1a1Y9FZfq_E1pSAaLYo8TxLwHDsDWjZxm/view?usp=sharing)
 
 ## Anomaly Detection
 To detect anomaly, we first estimate probability distribution function for each class. After that, based on multi instance learning method and difference of the distribution in the training model, label of each videos can correctely be detected. For starting of implementation in this part, we use the [RTFM](https://github.com/tianyu0207/RTFM) repository.

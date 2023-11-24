@@ -21,5 +21,4 @@ You can download extracted features for each datasets from the following links:
 ## Anomaly Detection
 
 ## Acknowledgement
-We appreciate the authors of the [I3D_Feature_Extraction](https://github.com/GowthamGottimukkala/I3D_Feature_Extraction_resnet) and [RTFM](https://github.com/tianyu0207/RTFM) for the very organized codes. We start our implemetation based on their public code on their GitHub repository.
-Our codebase is built based on . We really appreciate the authors for the nicely organized code!
+We appreciate the authors of the [I3D_Feature_Extraction](https://github.com/GowthamGottimukkala/I3D_Feature_Extraction_resnet) and [RTFM](https://github.com/tianyu0207/RTFM) for the very organized codes. We start our implemetation based on their repository.

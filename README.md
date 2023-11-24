@@ -12,14 +12,8 @@ Feature extraction networks that applied in the paper:
 - Combination of video swin transformer with St3D
 - Combination of video swin transformer with I3D
 
-To install `pytorch-generative`, clone the repository and install the requirements:
-
-```
-git clone https://www.github.com/EugenHotaj/pytorch-generative
-cd pytorch-generative
-pip install -r requirements.txt
-```
 ## Anomaly Detection
+
 
 Citation
 ===

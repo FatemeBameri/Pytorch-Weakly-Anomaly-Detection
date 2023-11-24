@@ -3,10 +3,10 @@ In this research, we have two main parts: feature extraction and anomaly detecti
 
 ## Feature Extraction
 Feature extraction networks that applied in the paper:
-* Swin [[paper]](https://openaccess.thecvf.com/content/CVPR2022/html/Liu_Video_Swin_Transformer_CVPR_2022_paper.html)
-* ResNet3D [[paper]](https://openaccess.thecvf.com/content_cvpr_2018/html/Tran_A_Closer_Look_CVPR_2018_paper.html)
-* S3D [[paper]](https://openaccess.thecvf.com/content_ECCV_2018/html/Saining_Xie_Rethinking_Spatiotemporal_Feature_ECCV_2018_paper.html)
-* I3D [[paper]](https://openaccess.thecvf.com/content_cvpr_2017/html/Carreira_Quo_Vadis_Action_CVPR_2017_paper.html)
+* Swin [(paper)](https://openaccess.thecvf.com/content/CVPR2022/html/Liu_Video_Swin_Transformer_CVPR_2022_paper.html)
+* ResNet3D [(paper)](https://openaccess.thecvf.com/content_cvpr_2018/html/Tran_A_Closer_Look_CVPR_2018_paper.html)
+* S3D [(paper)](https://openaccess.thecvf.com/content_ECCV_2018/html/Saining_Xie_Rethinking_Spatiotemporal_Feature_ECCV_2018_paper.html)
+* I3D [(paper)](https://openaccess.thecvf.com/content_cvpr_2017/html/Carreira_Quo_Vadis_Action_CVPR_2017_paper.html)
 * Combination of swin + ResNet (R3D version)
 * Combination of swin + ResNet (R(2+1)D version)
 * Combination of swin + S3D

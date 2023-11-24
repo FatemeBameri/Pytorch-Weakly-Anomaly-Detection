@@ -5,14 +5,12 @@ In this research, we have two main parts: feature extraction and anomaly detecti
 Feature extraction networks that applied in the paper:
 * Swin [[paper]](https://openaccess.thecvf.com/content/CVPR2022/html/Liu_Video_Swin_Transformer_CVPR_2022_paper.html)
 * ResNet3D [[paper]](https://openaccess.thecvf.com/content_cvpr_2018/html/Tran_A_Closer_Look_CVPR_2018_paper.html)
-* S3D --> Paper: [Rethinking Spatiotemporal Feature Learning: Speed-Accuracy Trade-offs in Video Classification](https://openaccess.thecvf.com/content_ECCV_2018/html/Saining_Xie_Rethinking_Spatiotemporal_Feature_ECCV_2018_paper.html)
-- ReseNet3D
-- S3D
-- I3D
-- Combination of video swin transformer with ResNet3D (in basic version)
-- Combination of video swin transformer with ResNet3D (in (2+1) version)
-- Combination of video swin transformer with St3D
-- Combination of video swin transformer with I3D
+* S3D [[paper]](https://openaccess.thecvf.com/content_ECCV_2018/html/Saining_Xie_Rethinking_Spatiotemporal_Feature_ECCV_2018_paper.html)
+* I3D [[paper]](https://openaccess.thecvf.com/content_cvpr_2017/html/Carreira_Quo_Vadis_Action_CVPR_2017_paper.html)
+- Combination of swin + ResNet3D (in R3D version)
+- Combination of swin + ResNet3D (in R(2+1)D version)
+- Combination of swin + St3D
+- Combination of swin + I3D
 
 ## Anomaly Detection
 

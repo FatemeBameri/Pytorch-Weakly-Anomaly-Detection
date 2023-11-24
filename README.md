@@ -19,6 +19,4 @@ To extract features we started with the implementation of the [I3D Feature Extra
 * ShanghaiTech part2 [(link)]()
 
 ## Anomaly Detection
-
-## Acknowledgement
-We appreciate the authors of the  and [RTFM](https://github.com/tianyu0207/RTFM) for the very organized codes. We start our implemetation based on their repository.
+[RTFM](https://github.com/tianyu0207/RTFM) 

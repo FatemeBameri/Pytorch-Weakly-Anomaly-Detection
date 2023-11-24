@@ -19,4 +19,5 @@ To extract features we started with the implementation of the [I3D Feature Extra
 * ShanghaiTech part2 [(link)]()
 
 ## Anomaly Detection
+To detect anomaly, we first estimate probability distribution function for each class. After that, based on multi instance learning method and difference of the distribution in the training model, label of each videos can be detected.  
 [RTFM](https://github.com/tianyu0207/RTFM) 

@@ -2,6 +2,7 @@
 In this research, we have two main parts: feature extraction and anomaly detection. In the feature extraction phase, we use four architetures with thier combinations so that we consider nine types of feature network. In the anomaly detection phase, we suppose that anomaly and normal data have different distributions. Therefore, we first estimate appropriate distribution for them and then calculate the difference of distributions between two classes, anomaly and normal, in order to detect anomaly or normal for each video input.We evaluate the proposed method on the datasets: ShanghaiTech, Chuk Avenue, and UCSD Ped2.
 
 ## Feature Extraction
+<div> &#9679;Video swin Transformer </div>
 To install `pytorch-generative`, clone the repository and install the requirements:
 
 ```

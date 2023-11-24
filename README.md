@@ -11,8 +11,10 @@ Feature extraction networks applying in the paper:
 * Combination of swin + ResNet (R(2+1)D version)
 * Combination of swin + S3D
 * Combination of swin + I3D
-### Downlod Features:
+### Downloding Features:
 * UCSD Ped2 [(link)](https://drive.google.com/file/d/1EUgplJ9Eqt-VdsqLm9GJ35TMQYzZR0n1/view?usp=sharing)
+* Chuk Avenue [(link)](https://drive.google.com/file/d/1KEXjiIsGfvsdu9Z05Yt8Cc3qZxByhcsO/view?usp=sharing)
+* ShanghaiTech[(link)]()
 
 ## Anomaly Detection
 

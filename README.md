@@ -3,7 +3,7 @@ In this research, we have two main parts: feature extraction and anomaly detecti
 
 ## Feature Extraction
 Feature extraction networks that applied in the paper:
-* swin: [Video Swin Transformer](https://openaccess.thecvf.com/content/CVPR2022/html/Liu_Video_Swin_Transformer_CVPR_2022_paper.html)
+* Swin--> Paper: [Video Swin Transformer](https://openaccess.thecvf.com/content/CVPR2022/html/Liu_Video_Swin_Transformer_CVPR_2022_paper.html)
 * 
 - ReseNet3D
 - S3D

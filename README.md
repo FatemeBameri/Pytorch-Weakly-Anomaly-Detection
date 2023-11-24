@@ -12,7 +12,7 @@ Feature extraction networks applying in the paper:
 * Combination of swin + S3D
 * Combination of swin + I3D
 ## Downloading Features
-To extract features we started with the implementation of the [I3D Feature Extraction](https://github.com/GowthamGottimukkala/I3D_Feature_Extraction_resnet) repository and then modified it to apply the desired architectures. Theus, you can download extracted features including video swin transformer, ResNet3D, S3D, I3D, and combined networks for each datasets from the following links:
+To extract features we started with the implementation of the [I3D Feature Extraction](https://github.com/GowthamGottimukkala/I3D_Feature_Extraction_resnet) repository and then modified it to apply the desired architectures. So, you can download our extracted features including video swin transformer, ResNet3D, S3D, I3D, and combined networks for each datasets from the following links:
 * UCSD Ped2 [(link)](https://drive.google.com/file/d/1EUgplJ9Eqt-VdsqLm9GJ35TMQYzZR0n1/view?usp=sharing)
 * Chuk Avenue [(link)](https://drive.google.com/file/d/1KEXjiIsGfvsdu9Z05Yt8Cc3qZxByhcsO/view?usp=sharing)
 * ShanghaiTech part1 [(link)](https://drive.google.com/file/d/1kOp-vbkK8mH8tt4FhuUD4nPN455M6qaI/view?usp=sharing)

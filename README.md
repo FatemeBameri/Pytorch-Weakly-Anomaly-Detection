@@ -11,7 +11,7 @@ Feature extraction networks applying in the paper:
 * Combination of swin + ResNet (R(2+1)D version)
 * Combination of swin + S3D
 * Combination of swin + I3D
-## Feature Extraction
+## Downloading Features
 You can download extracted features for each datasets from the following links:
 * UCSD Ped2 [(link)](https://drive.google.com/file/d/1EUgplJ9Eqt-VdsqLm9GJ35TMQYzZR0n1/view?usp=sharing)
 * Chuk Avenue [(link)](https://drive.google.com/file/d/1KEXjiIsGfvsdu9Z05Yt8Cc3qZxByhcsO/view?usp=sharing)
@@ -21,7 +21,7 @@ You can download extracted features for each datasets from the following links:
 ## Anomaly Detection
 
 
-Citation
+# Citation
 ===
 
 ```text
@@ -39,5 +39,5 @@ Citation
 }
 ```
 
-## <a name="9"></a> Acknowledgement
+## Acknowledgement
 Our codebase is built based on [RTFM](https://github.com/tianyu0207/RTFM). We really appreciate the authors for the nicely organized code!

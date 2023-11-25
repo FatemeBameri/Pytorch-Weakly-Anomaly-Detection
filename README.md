@@ -20,3 +20,8 @@ To extract features we started with the implementation of the [I3D Feature Extra
 
 ## Anomaly Detection
 To detect anomaly, we first estimated probability distribution function for each class. After that, based on multi instance learning method and difference of the distribution in the training model, label of each videos can correctely be detected. For starting of implementation in this part, we used the [RTFM](https://github.com/tianyu0207/RTFM) repository.
+## Running the code
+Steps for running the code:
+1. Go to Anomaly Detection folder.
+2. Download the features for the desired datase.
+3. Change the default_setting.py based on information of the desired datset.

@@ -1,4 +1,5 @@
 import torch.nn
+from torchmetrics.functional import kl_divergence
 from torch.distributions.half_cauchy import HalfCauchy
 from torch.distributions.exponential import Exponential
 from torch.distributions.geometric import Geometric
@@ -22,8 +23,12 @@ class Claculating_param_pdf(torch.nn.Module):
         self.exponential = Exponential(torch.tensor([1.5]))
         self.geometric = Geometric(torch.tensor([0.3]))
         self.gumble = Gumbel(torch.tensor([1.0]), torch.tensor([2.0]))
-        self.gamma = Gamma(torch.tensor([1.0]), torch.tensor([2.0]))
+
+
         self.half_normal = HalfNormal(torch.tensor([1.0]))
+        self.gamma = Gamma(torch.tensor([1.0]), torch.tensor([2.0]))
+
+
         self.normal = Normal(torch.tensor([0.0]), torch.tensor([2.0]))
         self.student = StudentT(torch.tensor([2.0]))
         self.beta = Beta(torch.tensor([1.0]), torch.tensor([3.0]))
@@ -33,23 +38,23 @@ class Claculating_param_pdf(torch.nn.Module):
         if self.type_dtb == 'Cauchy':
             return 10**self.cauchy.log_prob(input.cpu())
         if self.type_dtb == 'HalfCauchy':
-            return 10 ** self.half_cauchy.log_prob(input)
+            return 10 ** self.half_cauchy.log_prob(input.cpu())
         if self.type_dtb == 'Exponential':
-            return 10 ** self.exponential.log_prob(input)
+            return 10 ** self.exponential.log_prob(input.cpu())
         if self.type_dtb == 'Geometric':
-            return 10 ** self.geometric.log_prob(input)
+            return 10 ** self.geometric.log_prob(input.cpu())
         if self.type_dtb == 'Gumbel':
-            return 10 ** self.gumble.log_prob(input)
+            return 10 ** self.gumble.log_prob(input.cpu())
         if self.type_dtb == 'Gamma':
-            return 10 ** self.gamma.log_prob(input)
+            return 10 ** self.gamma.log_prob(input.cpu())
         if self.type_dtb == 'HalfNormal':
-            return 10 ** self.half_normal.log_prob(input)
+            return 10 ** self.half_normal.log_prob(input.cpu())
         if self.type_dtb == 'Normal':
-            return 10 ** self.normal.log_prob(input)
+            return 10 ** self.normal.log_prob(input.cpu())
         if self.type_dtb == 'StudentT':
-            return 10 ** self.student.log_prob(input)
+            return 10 ** self.student.log_prob(input.cpu())
         if self.type_dtb == 'Beta':
-            return 10 ** self.beta.log_prob(input)
+            return 10 ** self.beta.log_prob(input.cpu())
 
 
 class Claculating_non_param_pdf(torch.nn.Module):
@@ -57,8 +62,8 @@ class Claculating_non_param_pdf(torch.nn.Module):
         super(Claculating_non_param_pdf, self).__init__()
         self.type_dtb = type_dtb
         # kernel =‘gaussian’, ‘tophat’, ‘epanechnikov’, ‘exponential’, ‘linear’, ‘cosine’
-        self.kdea = KernelDensity(kernel='gaussian', bandwidth=1.5)
-        self.kden = KernelDensity(kernel='gaussian', bandwidth=1.5)
+        self.kdea = KernelDensity(kernel='exponential', bandwidth=1.5)
+        self.kden = KernelDensity(kernel='exponential', bandwidth=1.5)
         self.gmm = GaussianMixture(n_components=3, covariance_type="full")
 
     def forward(self, input):
@@ -86,18 +91,25 @@ class Claculating_non_param_pdf(torch.nn.Module):
 
         return dist_in
 
+# calculate the jenson shannon divergence
+def js_divergence(p, q,log_prob):
+    m = 0.5 * (p + q)
+    return (0.5 * kl_divergence(p, m,log_prob) + 0.5 * kl_divergence(q, m,log_prob))
+
+
 
 def diff_seg(num_videos,num_seg,features, k_near):
 
     total_diff_abnormal = []
     total_diff_index_q = []
+    log_prob = True
 
     for num_video in range(num_videos):
         diff_abnormal = []
         diff_index_q = []
         for p in range(num_seg - 1):
             for q in range(p + 1, num_seg):
-                if (abs(p - q) < k_near):
+                if (abs(p - q) <= k_near):
                     xp = features[num_video, p].view(1, -1)
                     xq = features[num_video, q].view(1, -1)
                     #diff = torch.cdist(xp,xq, p=2)
@@ -111,6 +123,36 @@ def diff_seg(num_videos,num_seg,features, k_near):
     return total_diff_abnormal, total_diff_index_q
 
 
+def mean_diff_seg(features, type_dist):
+
+    log_prob = True
+
+    num_videos, num_seg, _ = features.size()
+    diff_features = torch.zeros(num_videos,num_seg,1)
+    num_videos = num_videos // 10
+
+
+    for num_video in range(num_videos):
+        count = -1
+        for p in range(num_seg):
+            for q in range(num_seg):
+                if (abs(p - q) > 0):
+                    xp = features[num_video, p].view(1, -1)
+                    xq = features[num_video, q].view(1, -1)
+                    # diff=kl_divergence(xp, xq,log_prob='True')
+                    if type_dist == 'param':
+                        diff = js_divergence(xp, xq,log_prob)
+                    else:
+                        diff = abs(xp - xq)
+                        #log_prob = False
+                        #diff = js_divergence(xp, xq, log_prob)
+
+                    count = max(diff.item(),count)
+
+            diff_features[num_video,p,0] = count
+
+    return diff_features
+
 def calculating_dist(type_dist, features, index_dist):
 
     if type_dist == 'param':
@@ -120,13 +162,19 @@ def calculating_dist(type_dist, features, index_dist):
 
         type_dtb = param_dists[index_dist]
         pdf_features = Claculating_param_pdf(type_dtb)
+
+        #type_dtb = param_dists[4]
+        #pdf_n_features = Claculating_param_pdf(type_dtb)
+
         dist_features = pdf_features(features)
+        #normal_dist_features = pdf_n_features(normal_features)
 
     else:
         non_param_dists = ['kdea','kden', 'gmm']
         type_non_dbt = non_param_dists[index_dist]
         pdf_non_param = Claculating_non_param_pdf(type_non_dbt)
         dist_features = pdf_non_param(features)
+        #normal_dist_features = pdf_non_param(normal_features)
 
     return dist_features
 

@@ -34,17 +34,15 @@ class Dataset(data.Dataset):
         if self.test_mode is False:
             if self.dataset == 'shanghai':
                 if self.is_normal:
-                    #self.list = self.list[63:]
-                    #self.list = self.list[25:]
-                    self.list = self.list[6:]
-                    #self.list = self.list[16:]
+                    #self.list = self.list[63:]# sh
+                    #self.list = self.list[6:]# ped2
+                    self.list = self.list[14:] # chuk
                     print('normal list for shanghai tech')
                     print(self.list)
                 else:
-                    #self.list = self.list[:63]// sh
-                    #self.list = self.list[:25]// ped1
-                    self.list = self.list[:6] # ped2
-                    #self.list = self.list[:16]// chuk
+                    #self.list = self.list[:63]
+                    #self.list = self.list[:6]
+                    self.list = self.list[:14]
                     print('abnormal list for shanghai tech')
                     print(self.list)
 

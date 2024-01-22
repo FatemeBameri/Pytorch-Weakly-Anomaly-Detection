@@ -6,12 +6,14 @@ from torch.nn import L1Loss
 from torch.nn import MSELoss
 from torchmetrics.functional import kl_divergence
 
+# Train based on original version + proposed (distribution)
+
 # calculate the jenson shannon divergence
 def js_divergence(p, q,log_prob):
     m = 0.5 * (p + q)
     return (0.5 * kl_divergence(p, m,log_prob) + 0.5 * kl_divergence(q, m,log_prob))
 
-def sparsity(arr, lamda2):
+def sparsity(arr, batch_size, lamda2):
     loss = torch.mean(torch.norm(arr, dim=0))
     return lamda2*loss
 
@@ -61,9 +63,9 @@ class SigmoidCrossEntropyLoss(torch.nn.Module):
         return torch.abs(torch.mean(- x * target + torch.clamp(x, min=0) + torch.log(tmp)))
 
 
-class Diff_Dist_loss(torch.nn.Module):
+class RTFM_loss(torch.nn.Module):
     def __init__(self, alpha, margin):
-        super(Diff_Dist_loss, self).__init__()
+        super(RTFM_loss, self).__init__()
         self.alpha = alpha
         self.margin = margin
         self.sigmoid = torch.nn.Sigmoid()
@@ -82,23 +84,43 @@ class Diff_Dist_loss(torch.nn.Module):
         #label = label.cuda()
         label = label
 
-        loss_cls = self.criterion(score, label)  # BCE loss in the score space
-        log_prob = False
+        gt = np.array(label.cpu())
+        pred = np.round(np.array(score.cpu().detach().numpy()))
+        acc = (pred == gt).sum().item() / pred.shape[0]
+        error = 1 - acc
+        #print('%%%%%%%%%%%%%%')
+        #print(acc)
+        #error_list.append(error)
 
+        loss_cls = self.criterion(score, label)  # BCE loss in the score space
+
+        #loss_abn = torch.abs(self.margin - torch.norm(torch.mean(feat_a, dim=1), p=2, dim=1))
+        #loss_abn = torch.abs(self.margin - torch.norm(torch.mean(feat_a, dim=1), p=2, dim=0))
+
+        #loss_nor = torch.norm(torch.mean(feat_n, dim=1), p=2, dim=1)
+        #loss_nor = torch.norm(torch.mean(feat_n, dim=1), p=2, dim=0)
+
+        #loss_rtfm = torch.mean((loss_abn + loss_nor) ** 2)
+        #xp = feat_n.view(1, -1)
+        #xq = feat_a.view(1, -1)
+        #diff = kl_divergence(xp, xq, log_prob='True').item()
+        #loss_total = loss_cls + self.alpha * loss_rtfm
+        log_prob = False
+        ###### Param method #######
         feat_n = feat_n.view(1, -1)
         feat_a = feat_a.view(1, -1)
-
+        ###### Param method #######
         diff = js_divergence(feat_n, feat_a, log_prob)
-        diff2=torch.mean(torch.cdist(feat_abnormal,feat_normal, p=2))
+        #diff2=torch.mean(torch.cdist(feat_abnormal,feat_normal, p=2))
+        #Myrange=torch.tensor(400.0)
+        #Myrange = torch.tensor(200.0)# ped2 ==200# chuk ==100
+        #R = torch.tensor(50) #1, 10,50, 100,150
+        loss_rtfm1 = torch.max(torch.tensor(0), 1-diff)
+        #print(diff2)
+        #loss_rtfm2 = R - (torch.div(torch.min(Myrange, diff2), Myrange)) * R
+        loss_rtfm = loss_rtfm1
 
-        Myrange = torch.tensor(200.0)# ped2 ==200# chuk ==100
-        R = torch.tensor(50) #1, 10,50, 100,150
-        loss_diff1 = torch.max(torch.tensor(0), 1-diff)
-
-        loss_diff2 = R - (torch.div(torch.min(Myrange, diff2), Myrange)) * R
-        loss_dist = loss_diff2+ loss_diff1
-
-        loss_total = loss_cls + self.alpha * loss_dist
+        loss_total = loss_cls + self.alpha * loss_rtfm
 
         return loss_total
 
@@ -122,8 +144,8 @@ def train(nloader, aloader, model, batch_size, optimizer, device,step,train_loss
         nlabel = nlabel[0:batch_size]
         alabel = alabel[0:batch_size]
 
-        loss_criterion = Diff_Dist_loss(0.0001, 100)
-        loss_sparse = sparsity(abn_scores, 8e-3)
+        loss_criterion = RTFM_loss(0.0001, 100)
+        loss_sparse = sparsity(abn_scores, batch_size, 8e-3)
         loss_smooth = smooth(abn_scores, 8e-4)
         cost = loss_criterion(
             score_normal, score_abnormal, nlabel, alabel, feat_select_normal, feat_select_abn

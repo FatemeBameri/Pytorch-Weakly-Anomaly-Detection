@@ -5,7 +5,6 @@ Video surveillance systems are commonly employed to monitor activities and ensur
 Feature extraction networks applying in the paper:
 * Swin [(paper)](https://openaccess.thecvf.com/content/CVPR2022/html/Liu_Video_Swin_Transformer_CVPR_2022_paper.html)
 * ResNet3D [(paper)](https://openaccess.thecvf.com/content_cvpr_2018/html/Tran_A_Closer_Look_CVPR_2018_paper.html)
-* S3D [(paper)](https://openaccess.thecvf.com/content_ECCV_2018/html/Saining_Xie_Rethinking_Spatiotemporal_Feature_ECCV_2018_paper.html)
 * I3D [(paper)](https://openaccess.thecvf.com/content_cvpr_2017/html/Carreira_Quo_Vadis_Action_CVPR_2017_paper.html)
 ## Downloading Features
 To extract features we started with the implementation of the [I3D Feature Extraction](https://github.com/GowthamGottimukkala/I3D_Feature_Extraction_resnet) repository and then modified it to apply the desired architectures. So, you can download our extracted features including video swin transformer, ResNet3D, S3D, I3D, and combined networks for each datasets from the following links:
@@ -15,7 +14,7 @@ To extract features we started with the implementation of the [I3D Feature Extra
 * ShanghaiTech part2 [(link)](https://drive.google.com/file/d/1a1Y9FZfq_E1pSAaLYo8TxLwHDsDWjZxm/view?usp=sharing)
 
 ## Anomaly Detection
-To detect anomaly, we first estimated probability distribution function for each class. After that, based on multi instance learning method and difference of the distribution in the training model, label of each videos can correctely be detected. For starting of implementation in this part, we used the [RTFM](https://github.com/tianyu0207/RTFM) repository.
+The proposed framework consists of two stages: the base stage and the ensemble stage. In the base stage, the proposed method includes five main stages: feature extraction, attention mechanism, probability density estimation, computation of feature differences, and classification approach . For starting of implementation in this part, we used the [RTFM](https://github.com/tianyu0207/RTFM) repository.
 ## Running the code
 Steps for running the code:
 1. Go to the Anomaly Detection folder.
